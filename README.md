@@ -24,14 +24,14 @@ bing.getPicUrl(callbackFn);
 ```js
 const bing = require('bing-image');
 
-const callbackFn = (err, url) {
-    console.log(url);
-};
-
 const imageSize = {
     width: 1920,
     height: 1080
-}
+};
+
+const callbackFn = (err, url) => {
+    console.log(url);
+};
 
 bing.getPicUrl(callbackFn, imageSize);
 ```
