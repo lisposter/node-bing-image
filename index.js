@@ -1,33 +1,32 @@
-var http = require('http');
-var fs = require('fs');
+const http = require('http');
 
-var bing = 'www.bing.com';
-var api = '/HPImageArchive.aspx?format=xml&idx=$idx&n=1';
+const bing = 'www.bing.com';
+const api = '/HPImageArchive.aspx?format=xml&idx=$idx&n=1';
 
-
-var options = {
+const options = {
     method: 'GET',
     path: api,
     hostname: bing
 }
 
-var re = /<urlBase>(.*)<\/urlBase>/;
+const re = /<urlBase>(.*)<\/urlBase>/;
 
-function getPicUrl(callback) {
-    var req = http.request(options, function(res) {
+const getPicUrl = (callback, userOptions = { width: 1366, height: 768 }) => {
+    const req = http.request(options, (res) => {
         res.setEncoding('utf8');
-        var data = '';
+        let data = '';
 
-        res.on('data', function(chunk) {
+        res.on('data', (chunk) => {
             data += chunk;
         });
 
-        res.on('end', function() {
-            var url = re.exec(data)[1];
-            callback(null, 'http://' + bing + url + '_1366x768.jpg');
+        res.on('end', () => {
+            const url = re.exec(data)[1];
+            callback(null, `http://${bing}${url}_${userOptions.width}x${userOptions.height}.jpg`);
+            //callback(null, 'http://' + bing + url + '_1366x768.jpg');
         });
 
-        res.on('error', function(e) {
+        res.on('error', (e) => {
             callback(e);
         })
 

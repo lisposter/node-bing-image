@@ -8,10 +8,30 @@ $ npm i bing-image
 ```
 
 # Usage
-```js
-var bing = require('bing-image');
 
-bing.getPicUrl(function(err, url) {
+## Default
+```js
+const bing = require('bing-image');
+
+const callbackFn = (err, url) {
     console.log(url);
-})
+};
+
+bing.getPicUrl(callbackFn);
+```
+
+## Optionally
+```js
+const bing = require('bing-image');
+
+const imageSize = {
+    width: 1920,
+    height: 1080
+};
+
+const callbackFn = (err, url) => {
+    console.log(url);
+};
+
+bing.getPicUrl(callbackFn, imageSize);
 ```
