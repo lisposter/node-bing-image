@@ -1,6 +1,6 @@
 {
   "name": "bing-image",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "get bing.com's daily picture's url",
   "main": "index.js",
   "scripts": {
